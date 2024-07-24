@@ -10,7 +10,7 @@ import java.util.Optional;
 
 @Repository
 public class InMemoryUserRepository implements UserRepository {
-    final HashSet<String> userEmails = new HashSet<>();
+    private final HashSet<String> userEmails = new HashSet<>();
     private final HashMap<Long, User> userStorage = new HashMap<>();
     private Long seq = 0L;
 
