@@ -7,8 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.shareit.user.dto.UserCreateRequestDto;
+import ru.practicum.shareit.user.dto.UserInfoResponseDto;
 import ru.practicum.shareit.user.dto.UserUpdateRequestDto;
-import ru.practicum.shareit.user.model.User;
 import ru.practicum.shareit.user.service.UserService;
 
 import java.util.List;
@@ -23,39 +23,39 @@ public class UserController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public User create(@RequestBody @Valid final UserCreateRequestDto userCreateRequestDto) {
+    public UserInfoResponseDto create(@RequestBody @Valid final UserCreateRequestDto userCreateRequestDto) {
         log.info("request POST /users body = {}", userCreateRequestDto);
-        final User user = userService.create(userCreateRequestDto);
-        log.info("response POST /users body = {}", user);
-        return user;
+        final UserInfoResponseDto result = userService.create(userCreateRequestDto);
+        log.info("response POST /users body = {}", result);
+        return result;
     }
 
     @PatchMapping("/{userId}")
     @ResponseStatus(HttpStatus.OK)
-    public User update(@RequestBody @Valid final UserUpdateRequestDto userUpdateRequestDto,
-                       @PathVariable("userId") final long userId) {
+    public UserInfoResponseDto update(@RequestBody @Valid final UserUpdateRequestDto userUpdateRequestDto,
+                                      @PathVariable("userId") final long userId) {
         log.info("request PATH /users/{} body = {}", userId, userUpdateRequestDto);
-        final User user = userService.update(userUpdateRequestDto, userId);
-        log.info("response PATH /users/{} body = {}", userId, user);
-        return user;
+        final UserInfoResponseDto result = userService.update(userUpdateRequestDto, userId);
+        log.info("response PATH /users/{} body = {}", userId, result);
+        return result;
     }
 
     @GetMapping("/{userId}")
     @ResponseStatus(HttpStatus.OK)
-    public User get(@PathVariable("userId") final long userId) {
+    public UserInfoResponseDto get(@PathVariable("userId") final long userId) {
         log.info("request GET /users/{}", userId);
-        final User user = userService.get(userId);
-        log.info("response GET /users/{} body = {}", userId, user);
-        return user;
+        final UserInfoResponseDto result = userService.get(userId);
+        log.info("response GET /users/{} body = {}", userId, result);
+        return result;
     }
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<User> getAll() {
+    public List<UserInfoResponseDto> getAll() {
         log.info("request GET /users");
-        final List<User> users = userService.getAll();
-        log.info("response GET /users body = {}", users);
-        return users;
+        final List<UserInfoResponseDto> result = userService.getAll();
+        log.info("response GET /users body = {}", result);
+        return result;
     }
 
     @DeleteMapping("/{userId}")
